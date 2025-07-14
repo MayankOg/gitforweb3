@@ -61,7 +61,36 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Web3 Theme Colors
+				'cyber-purple': {
+					DEFAULT: 'hsl(var(--cyber-purple))',
+					dark: 'hsl(var(--cyber-purple-dark))'
+				},
+				'neon-cyan': {
+					DEFAULT: 'hsl(var(--neon-cyan))',
+					dark: 'hsl(var(--neon-cyan-dark))'
+				},
+				'terminal-green': 'hsl(var(--terminal-green))',
+				'warning-orange': 'hsl(var(--warning-orange))',
+				'glass-bg': 'hsl(var(--glass-bg))',
+				'glass-border': 'hsl(var(--glass-border))',
+				'deep-space': 'hsl(var(--deep-space))'
+			},
+			fontFamily: {
+				'inter': ['Inter', 'system-ui', 'sans-serif'],
+				'sans': ['Inter', 'system-ui', 'sans-serif']
+			},
+			backgroundImage: {
+				'gradient-radial': 'var(--gradient-radial)',
+				'gradient-mesh': 'var(--gradient-mesh)'
+			},
+			boxShadow: {
+				'glow': 'var(--glow-primary)',
+				'glow-intense': 'var(--glow-intense)',
+				'glow-secondary': 'var(--glow-secondary)',
+				'glass': 'var(--shadow-glass)',
+				'card': 'var(--shadow-card)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +113,28 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'mesh-gradient': {
+					'0%, 100%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' }
+				},
+				'glow': {
+					'from': { boxShadow: 'var(--glow-primary)' },
+					'to': { boxShadow: 'var(--glow-intense)' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-20px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'glow': 'glow 2s ease-in-out infinite alternate',
+				'float': 'float 6s ease-in-out infinite',
+				'spin-slow': 'spin 8s linear infinite',
+				'mesh-gradient': 'mesh-gradient 6s ease-in-out infinite'
 			}
 		}
 	},
