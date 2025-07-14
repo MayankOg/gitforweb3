@@ -7,13 +7,13 @@ function ParticleField() {
   const ref = useRef<THREE.Points>(null);
   
   // Generate random particle positions
-  const particleCount = 1000;
+  const particleCount = 500;
   const positions = new Float32Array(particleCount * 3);
   
   for (let i = 0; i < particleCount; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 20;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+    positions[i * 3] = (Math.random() - 0.5) * 15;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 15;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 15;
   }
 
   useFrame((state) => {
@@ -28,16 +28,16 @@ function ParticleField() {
       <PointMaterial
         transparent
         color="#A855F7"
-        size={0.03}
+        size={0.02}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.6}
+        opacity={0.4}
       />
     </Points>
   );
 }
 
-function NetworkNodes() {
+function FloatingNodes() {
   const ref = useRef<THREE.Group>(null);
   
   useFrame((state) => {
@@ -50,35 +50,21 @@ function NetworkNodes() {
     <group ref={ref}>
       {/* Central node */}
       <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[0.1, 16, 16]} />
-        <meshBasicMaterial color="#22D3EE" />
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshBasicMaterial color="#22D3EE" transparent opacity={0.6} />
       </mesh>
       
       {/* Surrounding nodes */}
       {[...Array(6)].map((_, i) => {
         const angle = (i / 6) * Math.PI * 2;
-        const x = Math.cos(angle) * 3;
-        const y = Math.sin(angle) * 3;
+        const x = Math.cos(angle) * 2.5;
+        const y = Math.sin(angle) * 2.5;
         
         return (
-          <group key={i}>
-            <mesh position={[x, y, 0]}>
-              <sphereGeometry args={[0.05, 12, 12]} />
-              <meshBasicMaterial color="#A855F7" />
-            </mesh>
-            {/* Connection lines */}
-            <line>
-              <bufferGeometry>
-                <bufferAttribute
-                  attach="attributes-position"
-                  array={new Float32Array([0, 0, 0, x, y, 0])}
-                  count={2}
-                  itemSize={3}
-                />
-              </bufferGeometry>
-              <lineBasicMaterial color="#A855F7" opacity={0.3} transparent />
-            </line>
-          </group>
+          <mesh key={i} position={[x, y, 0]}>
+            <sphereGeometry args={[0.04, 12, 12]} />
+            <meshBasicMaterial color="#A855F7" transparent opacity={0.5} />
+          </mesh>
         );
       })}
     </group>
@@ -87,14 +73,14 @@ function NetworkNodes() {
 
 export const ParticleBackground = () => {
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0 pointer-events-none">
       <Canvas
-        camera={{ position: [0, 0, 10], fov: 50 }}
+        camera={{ position: [0, 0, 8], fov: 50 }}
         style={{ background: 'transparent' }}
       >
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.3} />
         <ParticleField />
-        <NetworkNodes />
+        <FloatingNodes />
       </Canvas>
     </div>
   );
