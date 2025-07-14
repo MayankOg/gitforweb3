@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Plus, Search, Filter, Grid, List, Star, GitBranch, Clock, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -63,9 +64,14 @@ const mockStats = [
 ];
 
 export const Dashboard = () => {
+  const navigate = useNavigate();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTab, setSelectedTab] = useState('all');
+
+  const handleNewRepository = () => {
+    navigate('/repositories');
+  };
 
   const filteredRepositories = mockRepositories.filter(repo => {
     const matchesSearch = repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -92,7 +98,7 @@ export const Dashboard = () => {
               <h1 className="text-3xl font-bold gradient-text">Dashboard</h1>
               <p className="text-muted-foreground">Welcome back! Here's what's happening with your projects.</p>
             </div>
-            <Button className="btn-neon">
+            <Button className="btn-neon" onClick={handleNewRepository}>
               <Plus className="w-4 h-4 mr-2" />
               New Repository
             </Button>
@@ -248,7 +254,7 @@ export const Dashboard = () => {
               <p className="text-muted-foreground mb-4">
                 {searchQuery ? 'No repositories match your search.' : 'Get started by creating your first repository.'}
               </p>
-              <Button className="btn-neon">
+              <Button className="btn-neon" onClick={handleNewRepository}>
                 <Plus className="w-4 h-4 mr-2" />
                 Create Repository
               </Button>
