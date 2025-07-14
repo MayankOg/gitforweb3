@@ -1,10 +1,24 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, GitBranch, Zap, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ParticleBackground } from './ParticleBackground';
 import heroImage from '@/assets/hero-web3.jpg';
 
 export const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const scrollToFeatures = () => {
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleGetStarted = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
@@ -91,11 +105,11 @@ export const HeroSection = () => {
               transition={{ duration: 0.6, delay: 1 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button className="btn-neon group">
+              <Button className="btn-neon group" onClick={handleGetStarted}>
                 Get Started
                 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button className="btn-ghost">
+              <Button className="btn-ghost" onClick={scrollToFeatures}>
                 View Features
               </Button>
             </motion.div>
